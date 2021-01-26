@@ -1,0 +1,241 @@
+<html>
+	<body>
+	<script type="text/javascript">	
+	let f00=' '
+	let f01=' '
+	let f02=' '
+	let f10=' '
+	let f11=' '
+	let f12=' '
+	let f20=' '
+	let f21=' '
+	let f22=' '
+	let aktuellerSpieler='x'
+	
+	function spielerWechseln()
+	{
+		if (aktuellerSpieler=='x')
+		{
+			aktuellerSpieler='o'
+		}
+		else 
+		{
+			aktuellerSpieler='x'
+		}
+	}
+	function zugMachen(x,y)
+	{
+		let zellenId=x+'.'+y
+		document.getElementById(zellenId).value=aktuellerSpieler
+		feldBelegen(x,y)
+		siegPruefen()
+		spielerWechseln() 
+		cpuZug()
+		
+	}
+	
+	function cpuZug()
+	{
+		let zufallsfeld=Math.floor(Math.random()*9)
+		console.log(zufallsfeld)
+		
+	
+		let x=-1 
+		let y=-1
+		if(zufallsfeld==0 && f00==' ')
+		{
+			x=0 
+			y=0
+		}
+		if(zufallsfeld==1 && f01==' ')
+		{
+			x=0 
+			y=1
+		}
+		if(zufallsfeld==2 && f02==' ')
+		{
+			x=0
+			y=2
+		}
+		if(zufallsfeld==3 && f10==' ')
+		{
+			x=1
+			y=0
+		}
+		if(zufallsfeld==4 && f11==' ')
+		{
+			x=1
+			y=1
+		}
+		if(zufallsfeld==5 && f12==' ')
+		{
+			x=1
+			y=2
+		}
+		if(zufallsfeld==6 && f20==' ')
+		{
+			x=2
+			y=0
+		}
+		if(zufallsfeld==7 && f21==' ')
+		{
+			x=2
+			y=1
+		}
+		if(zufallsfeld==8 && f22==' ')
+		{
+			x=2
+			y=2
+		}
+		if(x>=0)
+		{	
+			let zellenId=x+'.'+y
+			document.getElementById(zellenId).value=aktuellerSpieler
+			feldBelegen(x,y)
+			siegPruefen()
+			spielerWechseln()
+		}
+	
+		else 
+		{
+			cpuZug()
+		}
+	}
+	function siegPruefen()
+	{
+		if(f00==aktuellerSpieler)
+		{
+			if(f01==aktuellerSpieler)
+			{
+				if(f02==aktuellerSpieler)
+				{
+					alert('Gewonnen hat: '+aktuellerSpieler)
+				}
+			}
+			
+		}
+		if(f10==aktuellerSpieler && f11==aktuellerSpieler && f12==aktuellerSpieler)
+		{
+			alert('Gewonnen hat: '+aktuellerSpieler)
+		}
+		if(f20==aktuellerSpieler && f21==aktuellerSpieler && f22==aktuellerSpieler)
+		{
+			alert('Gewonnen hat: '+aktuellerSpieler)
+		}
+		if(f00==aktuellerSpieler && f11==aktuellerSpieler && f22==aktuellerSpieler)
+		{
+			alert('Gewonnen hat: '+aktuellerSpieler)
+		}
+		if(f02==aktuellerSpieler && f11==aktuellerSpieler && f20==aktuellerSpieler)
+		{
+			alert('Gewonnen hat: '+aktuellerSpieler)
+		}
+		if(f00==aktuellerSpieler && f10==aktuellerSpieler && f20==aktuellerSpieler)
+		{
+			alert('Gewonnen hat: '+aktuellerSpieler)
+		}
+		if(f01==aktuellerSpieler && f11==aktuellerSpieler && f21==aktuellerSpieler)
+		{
+			alert('Gewonnen hat: '+aktuellerSpieler)
+		}
+		if(f02==aktuellerSpieler && f12==aktuellerSpieler && f22==aktuellerSpieler)
+		{
+			alert('Gewonnen hat: '+aktuellerSpieler)
+		}
+	}
+	function feldBelegen(x,y)
+	{
+	
+			if(x==0 && y==0)
+			{
+				f00=aktuellerSpieler
+			}
+			else if(x==0 && y==1)
+			{	
+				f01=aktuellerSpieler
+			}
+			else if(x==0 && y==2)
+			{
+				f02=aktuellerSpieler
+			}
+		
+		
+		
+			else if(x==1 && y==0)
+			{
+				f10=aktuellerSpieler
+			}
+			else if(x==1 && y==1)
+			{	
+				f11=aktuellerSpieler
+			}
+			else if(x==1 && y==2)
+			{
+				f12=aktuellerSpieler
+			}
+		
+		
+		
+			else if(x==2 && y==0)
+			{
+				f20=aktuellerSpieler
+			}
+			else if(x==2 && y==1)
+			{	
+				f21=aktuellerSpieler
+			}
+			else if(x==2 && y==2)
+			{
+				f22=aktuellerSpieler
+			}	
+		
+	}
+	
+	</script>
+	<table>
+		<tr>
+			<td>
+			<input type="button" id="0.0" onClick="zugMachen(0,0)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="0.1" onClick="zugMachen(0,1)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="0.2" onClick="zugMachen(0,2)">
+			</input>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<input type="button" id="1.0" onClick="zugMachen(1,0)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="1.1" onClick="zugMachen(1,1)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="1.2" onClick="zugMachen(1,2)">
+			</input>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<input type="button" id="2.0" onClick="zugMachen(2,0)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="2.1" onClick="zugMachen(2,1)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="2.2" onClick="zugMachen(2,2)">
+			</input>
+			</td>
+		</tr>
+	</table>
+	copyright James Ochs
+	</body>
+</html>
