@@ -1,0 +1,81 @@
+<html>
+	<body>
+	<script type="text/javascript">	
+	let f00=' '
+	let f01=' '
+	let f02=' '
+	let f10=' '
+	let f11=' '
+	let f12=' '
+	let f20=' '
+	let f21=' '
+	let f22=' '
+	let dran='x'
+	
+	function spielerWechseln()
+	{
+		if (dran=='x')
+		{
+			dran='o'
+		}
+		else 
+		{
+			dran='x'
+		}
+	}
+	function meinAlert(x,y)
+	{
+		let zellenId=x+'.'+y
+		document.getElementById(zellenId).value=dran
+		spielerWechseln()
+		console.log(dran)
+	}
+
+	
+	</script>
+	<table>
+		<tr>
+			<td>
+			<input type="button" id="0.0" onClick="meinAlert(0,0)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="0.1" onClick="meinAlert(0,1)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="0.2" onClick="meinAlert(0,2)">
+			</input>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<input type="button" id="1.0" onClick="meinAlert(1,0)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="1.1" onClick="meinAlert(1,1)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="1.2" onClick="meinAlert(1,2)">
+			</input>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<input type="button" id="2.0" onClick="meinAlert(2,0)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="2.1" onClick="meinAlert(2,1)">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="2.2" onClick="meinAlert(2,2)">
+			</input>
+			</td>
+		</tr>
+	</table>
+	</body>
+</html>
