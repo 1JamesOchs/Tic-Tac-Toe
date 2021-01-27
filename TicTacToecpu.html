@@ -31,64 +31,114 @@
 		siegPruefen()
 		spielerWechseln() 
 		cpuZug()
-		
 	}
 	
 	function cpuZug()
 	{
 		let zufallsfeld=Math.floor(Math.random()*9)
 		console.log(zufallsfeld)
-		
 	
 		let x=-1 
 		let y=-1
-		if(zufallsfeld==0 && f00==' ')
+		
+		if(f00==' ' && f01==f02 && f01!=' ' || f00==' ' && f10==f20 && f10!= ' ' || f00==' ' && f11==f22 && f11!=' ')
 		{
-			x=0 
+			x=0
 			y=0
 		}
-		if(zufallsfeld==1 && f01==' ')
+		if(f01==' ' && f00==f02 && f01==' ' && f00!=' ' || f01==' ' && f11==f21 && f11!= ' ')
 		{
-			x=0 
+			x=0
 			y=1
 		}
-		if(zufallsfeld==2 && f02==' ')
+		if(f02==' ' && f00==f01 && f00!=' ' || f02==' ' && f12==f22 && f12!= ' ' || f02==' ' && f11==f20 && f11!=' ')
 		{
 			x=0
 			y=2
 		}
-		if(zufallsfeld==3 && f10==' ')
+		if(f10==' ' && f11==f12 && f11!=' ' || f10==' ' && f00==f20 && f00!= ' ')
 		{
 			x=1
 			y=0
 		}
-		if(zufallsfeld==4 && f11==' ')
+		if(f11==' ' && f10==f12 && f10!=' ' || f11==' ' && f01==f21 && f01!= ' ' || f11==' ' && f00==f22 && f00!=' ' || f11==' ' && f02==f20 && f02!=' ')
 		{
 			x=1
 			y=1
 		}
-		if(zufallsfeld==5 && f12==' ')
+		if(f12==' ' && f10==f11 && f10!=' ' || f12==' ' && f02==f22 && f02!= ' ')
 		{
 			x=1
 			y=2
 		}
-		if(zufallsfeld==6 && f20==' ')
+		if(f20==' ' && f21==f22 && f21!=' ' || f20==' ' && f00==f10 && f00!= ' ' || f20==' ' && f02==f11 && f02!=' ')
 		{
 			x=2
 			y=0
 		}
-		if(zufallsfeld==7 && f21==' ')
+		if(f21==' ' && f20==f22 && f20!=' ' || f21==' ' && f01==f11 && f01!= ' ')
 		{
 			x=2
 			y=1
 		}
-		if(zufallsfeld==8 && f22==' ')
+		if(f22==' ' && f20==f21 && f21!=' ' || f22==' ' && f02==f12 && f02!= ' ' || f22==' ' && f00==f11 && f00!=' ')
 		{
 			x=2
 			y=2
 		}
+	
+		if(x==-1)
+		{
+			if(zufallsfeld==0 && f00==' ')
+			{
+				x=0 
+				y=0
+			}
+			if(zufallsfeld==1 && f01==' ')
+			{
+				x=0 
+				y=1
+			}
+			if(zufallsfeld==2 && f02==' ')
+			{
+				x=0
+				y=2
+			}
+			if(zufallsfeld==3 && f10==' ')
+			{
+				x=1
+				y=0
+			}
+			if(zufallsfeld==4 && f11==' ')
+			{
+				x=1
+				y=1
+			}
+			if(zufallsfeld==5 && f12==' ')
+			{
+				x=1
+				y=2
+			}
+			if(zufallsfeld==6 && f20==' ')
+			{
+				x=2
+				y=0
+			}
+			if(zufallsfeld==7 && f21==' ')
+			{
+				x=2
+				y=1
+			}
+			if(zufallsfeld==8 && f22==' ')
+			{
+				x=2
+				y=2
+			}
+		}	
+		
 		if(x>=0)
 		{	
+		
 			let zellenId=x+'.'+y
 			document.getElementById(zellenId).value=aktuellerSpieler
 			feldBelegen(x,y)
@@ -166,8 +216,6 @@
 				f02=aktuellerSpieler
 			}
 		
-		
-		
 			else if(x==1 && y==0)
 			{
 				f10=aktuellerSpieler
@@ -180,8 +228,6 @@
 			{
 				f12=aktuellerSpieler
 			}
-		
-		
 		
 			else if(x==2 && y==0)
 			{
@@ -210,7 +256,7 @@
 		let zellenId=x+'.'+y
 		document.getElementById(zellenId).style.backgroundColor="#00ff00"
 	}
-	
+	 
 	</script>
 	<table>
 		<tr>
