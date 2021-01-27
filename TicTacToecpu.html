@@ -12,6 +12,7 @@
 	let f22=' '
 	let aktuellerSpieler='x'
 	let spielBeendet=false
+	let anzahlKreuze=0
 	
 	function spielerWechseln()
 	{
@@ -26,30 +27,24 @@
 	}
 	function zugMachen(x,y)
 	{
-		if(spielBeendet==false)
+		if(spielBeendet==false && feldNochFrei(x,y))
 		{
 			let zellenId=x+'.'+y
 			document.getElementById(zellenId).value=aktuellerSpieler
 			feldBelegen(x,y)
 			spielBeendet=hatAktuellerSpielerGewonnen()
+			if(anzahlKreuze==5)
+			{
+				spielBeendet=true
+			}
 			if(spielBeendet==false)
 			{
 				spielerWechseln() 
 				cpuZug()
 			}
 		}
-		if(feldNochFrei=false)
-		{
-			let zellenId=x+'.'+y
-			document.getElementById(zellenId).value=aktuellerSpieler
-			feldBelegen(x,y)
-			spielBeendet=hatAktuellerSpielerGewonnen()
-			if(spielBeendet==false)
-			{
-				spielerWechseln() 
-				cpuZug()
-			}
-		}		
+		
+		
 	}			
 	
 	function feldNochFrei(x,y)
@@ -59,7 +54,6 @@
 			if(x==0 && y==0 && f00==' ')
 		
 			return true
-			else return false
 		}
 		{
 			if(x==0 && y==1 && f01==' ')
