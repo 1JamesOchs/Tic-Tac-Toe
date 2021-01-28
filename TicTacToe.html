@@ -1,5 +1,20 @@
 <html>
 	<body>
+		<p>
+			<strong>
+				<font size="7">
+					Tic Tac Toe 
+				</font>
+			</strong>
+		</p>
+		<p>
+			<b>
+				<font size="5">
+					Mensch gegen Mensch
+				</font>
+			</b>
+		</p>
+		
 	<script type="text/javascript">	
 	let f00=' '
 	let f01=' '
@@ -10,73 +25,267 @@
 	let f20=' '
 	let f21=' '
 	let f22=' '
-	let dran='x'
+	let aktuellerSpieler='x'
+	let spielBeendet=false
+	let anzahlKreuze=0
 	
 	function spielerWechseln()
 	{
-		if (dran=='x')
+		if (aktuellerSpieler=='x')
 		{
-			dran='o'
+			aktuellerSpieler='o'
 		}
 		else 
 		{
-			dran='x'
+			aktuellerSpieler='x'
 		}
 	}
-	function meinAlert(x,y)
+	function zugMachen(x,y)
+	{
+		if(spielBeendet==false && feldNochFrei(x,y))
+		{
+			let zellenId=x+'.'+y
+			document.getElementById(zellenId).value=aktuellerSpieler
+			feldBelegen(x,y)
+			anzahlKreuze=anzahlKreuze+1
+			spielBeendet=hatAktuellerSpielerGewonnen()
+			if(anzahlKreuze==5)
+			{
+				spielBeendet=true
+			}
+			if(spielBeendet==false)
+			{
+				spielerWechseln()
+			}
+		}
+		
+		
+	}			
+	
+	function feldNochFrei(x,y)
+	
+	{
+		{
+			if(x==0 && y==0 && f00==' ')
+		
+			return true
+		}
+		{
+			if(x==0 && y==1 && f01==' ')
+		
+			return true
+		}
+		{
+			if(x==0 && y==2 && f02==' ')
+		
+			return true
+		}	
+		{
+			if(x==1 && y==0 && f10==' ')
+		
+			return true
+		}		
+		{
+			if(x==1 && y==1 && f11==' ')
+		
+			return true
+		}
+		{
+			if(x==1 && y==2 && f12==' ')
+		
+			return true
+		}
+		{
+			if(x==2 && y==0 && f20==' ')
+		
+			return true
+		}
+		{
+			if(x==2 && y==1 && f21==' ')
+		
+			return true
+		}
+		{
+			if(x==2 && y==2 && f22==' ')
+		
+			return true
+		}
+		return false
+	}
+	
+	
+	function hatAktuellerSpielerGewonnen()
+	
+	{
+		if(f00==aktuellerSpieler)
+		{
+			if(f01==aktuellerSpieler)
+			{
+				if(f02==aktuellerSpieler)
+				{
+					siegDarstellen(0,0,0,1,0,2)
+					return true
+				}
+			}
+			
+		}
+		if(f10==aktuellerSpieler && f11==aktuellerSpieler && f12==aktuellerSpieler)
+		{
+			
+			siegDarstellen(1,0,1,1,1,2)
+			return true
+		}
+		if(f20==aktuellerSpieler && f21==aktuellerSpieler && f22==aktuellerSpieler)
+		{
+			
+			siegDarstellen(2,0,2,1,2,2)
+			return true
+		}
+		if(f00==aktuellerSpieler && f11==aktuellerSpieler && f22==aktuellerSpieler)
+		{
+			
+			siegDarstellen(0,0,1,1,2,2)
+			return true
+		}
+		if(f02==aktuellerSpieler && f11==aktuellerSpieler && f20==aktuellerSpieler)
+		{
+			
+			siegDarstellen(0,2,1,1,2,0)
+			return true
+		}
+		if(f00==aktuellerSpieler && f10==aktuellerSpieler && f20==aktuellerSpieler)
+		{
+			
+			siegDarstellen(0,0,1,0,2,0)
+			return true
+		}
+		if(f01==aktuellerSpieler && f11==aktuellerSpieler && f21==aktuellerSpieler)
+		{
+			
+			siegDarstellen(0,1,1,1,2,1)
+			return true
+		}
+		if(f02==aktuellerSpieler && f12==aktuellerSpieler && f22==aktuellerSpieler)
+		{
+			
+			siegDarstellen(0,2,1,2,2,2)
+			return true
+		}
+		return false
+	}
+	function feldBelegen(x,y)
+	{
+	
+			if(x==0 && y==0)
+			{
+				f00=aktuellerSpieler
+			}
+			else if(x==0 && y==1)
+			{	
+				f01=aktuellerSpieler
+			}
+			else if(x==0 && y==2)
+			{
+				f02=aktuellerSpieler
+			}
+		
+			else if(x==1 && y==0)
+			{
+				f10=aktuellerSpieler
+			}
+			else if(x==1 && y==1)
+			{	
+				f11=aktuellerSpieler
+			}
+			else if(x==1 && y==2)
+			{
+				f12=aktuellerSpieler
+			}
+		
+			else if(x==2 && y==0)
+			{
+				f20=aktuellerSpieler
+			}
+			else if(x==2 && y==1)
+			{	
+				f21=aktuellerSpieler
+			}
+			else if(x==2 && y==2)
+			{
+				f22=aktuellerSpieler
+			}	
+		
+	}
+	
+	function siegDarstellen(x1,y1,x2,y2,x3,y3)
+	{
+		faerbeButton(x1,y1)
+		faerbeButton(x2,y2)
+		faerbeButton(x3,y3)
+	}
+	
+	function faerbeButton(x,y)
 	{
 		let zellenId=x+'.'+y
-		document.getElementById(zellenId).value=dran
-		spielerWechseln()
-		console.log(dran)
+		document.getElementById(zellenId).style.backgroundColor="#00ff00"
 	}
-
-	
+	 
 	</script>
 	<table>
 		<tr>
 			<td>
-			<input type="button" id="0.0" onClick="meinAlert(0,0)">
+			<input type="button" id="0.0" onClick="zugMachen(0,0)" style="min-width:200px;min-height:200px;font-size:60pt;">
 			</input>
 			</td>
 			<td>
-			<input type="button" id="0.1" onClick="meinAlert(0,1)">
+			<input type="button" id="0.1" onClick="zugMachen(0,1)" style="min-width:200px;min-height:200px;font-size:60pt;">
 			</input>
 			</td>
 			<td>
-			<input type="button" id="0.2" onClick="meinAlert(0,2)">
-			</input>
-			</td>
-		</tr>
-		<tr>
-			<td>
-			<input type="button" id="1.0" onClick="meinAlert(1,0)">
-			</input>
-			</td>
-			<td>
-			<input type="button" id="1.1" onClick="meinAlert(1,1)">
-			</input>
-			</td>
-			<td>
-			<input type="button" id="1.2" onClick="meinAlert(1,2)">
+			<input type="button" id="0.2" onClick="zugMachen(0,2)" style="min-width:200px;min-height:200px;font-size:60pt;">
 			</input>
 			</td>
 		</tr>
 		<tr>
 			<td>
-			<input type="button" id="2.0" onClick="meinAlert(2,0)">
+			<input type="button" id="1.0" onClick="zugMachen(1,0)" style="min-width:200px;min-height:200px;font-size:60pt;">
 			</input>
 			</td>
 			<td>
-			<input type="button" id="2.1" onClick="meinAlert(2,1)">
+			<input type="button" id="1.1" onClick="zugMachen(1,1)" style="min-width:200px;min-height:200px;font-size:60pt;">
 			</input>
 			</td>
 			<td>
-			<input type="button" id="2.2" onClick="meinAlert(2,2)">
+			<input type="button" id="1.2" onClick="zugMachen(1,2)" style="min-width:200px;min-height:200px;font-size:60pt;">
+			</input>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<input type="button" id="2.0" onClick="zugMachen(2,0)" style="min-width:200px;min-height:200px;font-size:60pt;">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="2.1" onClick="zugMachen(2,1)" style="min-width:200px;min-height:200px;font-size:60pt;">
+			</input>
+			</td>
+			<td>
+			<input type="button" id="2.2" onClick="zugMachen(2,2)" style="min-width:200px;min-height:200px;font-size:60pt;">
 			</input>
 			</td>
 		</tr>
 	</table>
-	copyright James Ochs
+	<p>
+		<a href="index.html">
+			Zurueck zur Hauptseite
+		</a>
+	</p>
+	<p>
+		copyright James Ochs
+	</p>				
+	<button onClick="window.location.reload();"> 
+		<div style="position:absolut; left:40%; bottom:50px; width:300px;">Neues Spiel
+		</div>
+	</button>
 	</body>
 </html>
