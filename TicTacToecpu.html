@@ -16,18 +16,14 @@
 		</p>
 		
 	<script type="text/javascript">	
-	let f00=' '
-	let f01=' '
-	let f02=' '
-	let f10=' '
-	let f11=' '
-	let f12=' '
-	let f20=' '
-	let f21=' '
-	let f22=' '
 	let aktuellerSpieler='x'
 	let spielBeendet=false
 	let anzahlKreuze=0
+	let feld=[
+			[' ',' ',' '],
+			[' ',' ',' '],
+			[' ',' ',' ']
+			]
 	
 	function spielerWechseln()
 	{
@@ -64,54 +60,8 @@
 	}			
 	
 	function feldNochFrei(x,y)
-	
 	{
-		{
-			if(x==0 && y==0 && f00==' ')
-		
-			return true
-		}
-		{
-			if(x==0 && y==1 && f01==' ')
-		
-			return true
-		}
-		{
-			if(x==0 && y==2 && f02==' ')
-		
-			return true
-		}	
-		{
-			if(x==1 && y==0 && f10==' ')
-		
-			return true
-		}		
-		{
-			if(x==1 && y==1 && f11==' ')
-		
-			return true
-		}
-		{
-			if(x==1 && y==2 && f12==' ')
-		
-			return true
-		}
-		{
-			if(x==2 && y==0 && f20==' ')
-		
-			return true
-		}
-		{
-			if(x==2 && y==1 && f21==' ')
-		
-			return true
-		}
-		{
-			if(x==2 && y==2 && f22==' ')
-		
-			return true
-		}
-		return false
+		return(feld[x][y]==' ')
 	}
 	
 	function cpuZug()
@@ -122,99 +72,109 @@
 		let x=-1 
 		let y=-1
 		
-		if(f00==' ' && f01==f02 && f01!=' ' || f00==' ' && f10==f20 && f10!= ' ' || f00==' ' && f11==f22 && f11!=' ')
+		if(feld[0][0]==' ' && feld[0][1]==feld[0][2] && feld[0][1]!=' ' || feld[0][0]==' ' && feld[1][0]==feld[2][0] && feld[1][0]!= ' ' || feld[0][0]==' ' && feld[1][1]==feld[2][2] && feld[1][1]!=' ')
 		{
 			x=0
 			y=0
 		}
-		if(f01==' ' && f00==f02 && f01==' ' && f00!=' ' || f01==' ' && f11==f21 && f11!= ' ')
+		if(feld[0][1]==' ' && feld[0][0]==feld[0][2] && feld[0][1]==' ' && feld[0][0]!=' ' || feld[0][1]==' ' && feld[1][1]==feld[2][1] && feld[1][1]!= ' ')
 		{
 			x=0
 			y=1
 		}
-		if(f02==' ' && f00==f01 && f00!=' ' || f02==' ' && f12==f22 && f12!= ' ' || f02==' ' && f11==f20 && f11!=' ')
+		if(feld[0][2]==' ' && feld[0][0]==feld[0][1] && feld[0][0]!=' ' || feld[0][2]==' ' && feld[1][2]==feld[2][2] && feld[1][2]!= ' ' || feld[0][2]==' ' && feld[1][1]==feld[2][0] && feld[1][1]!=' ')
 		{
 			x=0
 			y=2
 		}
-		if(f10==' ' && f11==f12 && f11!=' ' || f10==' ' && f00==f20 && f00!= ' ')
+		if(feld[1][0]==' ' && feld[1][1]==feld[1][2] && feld[1][1]!=' ' || feld[1][0]==' ' && feld[0][0]==feld[2][0] && feld[0][0]!= ' ')
 		{
 			x=1
 			y=0
 		}
-		if(f11==' ' && f10==f12 && f10!=' ' || f11==' ' && f01==f21 && f01!= ' ' || f11==' ' && f00==f22 && f00!=' ' || f11==' ' && f02==f20 && f02!=' ')
+		if(feld[1][1]==' ' && feld[1][0]==feld[1][2] && feld[1][0]!=' ' || feld[1][1]==' ' && feld[0][1]==feld[2][1] && feld[0][1]!= ' ' || feld[1][1]==' ' && feld[0][0]==feld[2][2] && feld[0][0]!=' ' || feld[1][1]==' ' && feld[0][2]==feld[2][0] && feld[0][2]!=' ')
 		{
 			x=1
 			y=1
 		}
-		if(f12==' ' && f10==f11 && f10!=' ' || f12==' ' && f02==f22 && f02!= ' ')
+		if(feld[1][2]==' ' && feld[1][0]==feld[1][1] && feld[1][0]!=' ' || feld[1][2]==' ' && feld[0][2]==feld[2][2] && feld[0][2]!= ' ')
 		{
 			x=1
 			y=2
 		}
-		if(f20==' ' && f21==f22 && f21!=' ' || f20==' ' && f00==f10 && f00!= ' ' || f20==' ' && f02==f11 && f02!=' ')
+		if(feld[2][0]==' ' && feld[2][1]==feld[2][2] && feld[2][1]!=' ' || feld[2][0]==' ' && feld[0][0]==feld[1][0] && feld[0][0]!= ' ' || feld[2][0]==' ' && feld[0][2]==feld[1][1] && feld[0][2]!=' ')
 		{
 			x=2
 			y=0
 		}
-		if(f21==' ' && f20==f22 && f20!=' ' || f21==' ' && f01==f11 && f01!= ' ')
+		if(feld[2][1]==' ' && feld[2][0]==feld[2][2] && feld[2][0]!=' ' || feld[2][1]==' ' && feld[0][1]==feld[1][1] && feld[0][1]!= ' ')
 		{
 			x=2
 			y=1
 		}
-		if(f22==' ' && f20==f21 && f21!=' ' || f22==' ' && f02==f12 && f02!= ' ' || f22==' ' && f00==f11 && f00!=' ')
+		if(feld[2][2]==' ' && feld[2][0]==feld[2][1] && feld[2][1]!=' ' || feld[2][2]==' ' && feld[0][2]==feld[1][2] && feld[0][2]!= ' ' || feld[2][2]==' ' && feld[0][0]==feld[1][1] && feld[0][0]!=' ')
 		{
 			x=2
 			y=2
 		}
 	
 		if(x==-1)
-		{
-			if(zufallsfeld==0 && f00==' ')
+		{	
+			x=zufallsfeld/3
+			x=Math.floor(x) 
+			y=zufallsfeld%3
+			console.log(x,y)
+			if(feldNochFrei(x,y)==false)
+			{
+				x=-1
+			}
+			
+			
+			/*if(zufallsfeld==0 && feld[0][0]==' ')
 			{
 				x=0 
 				y=0
 			}
-			if(zufallsfeld==1 && f01==' ')
+			if(zufallsfeld==1 && feld[0][1]==' ')
 			{
 				x=0 
 				y=1
 			}
-			if(zufallsfeld==2 && f02==' ')
+			if(zufallsfeld==2 && feld[0][2]==' ')
 			{
 				x=0
 				y=2
 			}
-			if(zufallsfeld==3 && f10==' ')
+			if(zufallsfeld==3 && feld[1][0]==' ')
 			{
 				x=1
 				y=0
 			}
-			if(zufallsfeld==4 && f11==' ')
+			if(zufallsfeld==4 && feld[1][1]==' ')
 			{
 				x=1
 				y=1
 			}
-			if(zufallsfeld==5 && f12==' ')
+			if(zufallsfeld==5 && feld[1][2]==' ')
 			{
 				x=1
 				y=2
 			}
-			if(zufallsfeld==6 && f20==' ')
+			if(zufallsfeld==6 && feld[2][0]==' ')
 			{
 				x=2
 				y=0
 			}
-			if(zufallsfeld==7 && f21==' ')
+			if(zufallsfeld==7 && feld[2][1]==' ')
 			{
 				x=2
 				y=1
 			}
-			if(zufallsfeld==8 && f22==' ')
+			if(zufallsfeld==8 && feld[2][2]==' ')
 			{
 				x=2
 				y=2
-			}
+			}*/
 		}	
 		
 		if(x>=0)
@@ -235,11 +195,11 @@
 	function hatAktuellerSpielerGewonnen()
 	
 	{
-		if(f00==aktuellerSpieler)
+		if(feld[0][0]==aktuellerSpieler)
 		{
-			if(f01==aktuellerSpieler)
+			if(feld[0][1]==aktuellerSpieler)
 			{
-				if(f02==aktuellerSpieler)
+				if(feld[0][2]==aktuellerSpieler)
 				{
 					siegDarstellen(0,0,0,1,0,2)
 					return true
@@ -247,96 +207,97 @@
 			}
 			
 		}
-		if(f10==aktuellerSpieler && f11==aktuellerSpieler && f12==aktuellerSpieler)
+		if(feld[1][0]==aktuellerSpieler && feld[1][1]==aktuellerSpieler && feld[1][2]==aktuellerSpieler)
 		{
 			
 			siegDarstellen(1,0,1,1,1,2)
 			return true
 		}
-		if(f20==aktuellerSpieler && f21==aktuellerSpieler && f22==aktuellerSpieler)
+		if(feld[2][0]==aktuellerSpieler && feld[2][1]==aktuellerSpieler && feld[2][2]==aktuellerSpieler)
 		{
 			
 			siegDarstellen(2,0,2,1,2,2)
 			return true
 		}
-		if(f00==aktuellerSpieler && f11==aktuellerSpieler && f22==aktuellerSpieler)
+		if(feld[0][0]==aktuellerSpieler && feld[1][1]==aktuellerSpieler && feld[2][2]==aktuellerSpieler)
 		{
 			
 			siegDarstellen(0,0,1,1,2,2)
 			return true
 		}
-		if(f02==aktuellerSpieler && f11==aktuellerSpieler && f20==aktuellerSpieler)
+		if(feld[0][2]==aktuellerSpieler && feld[1][1]==aktuellerSpieler && feld[2][0]==aktuellerSpieler)
 		{
 			
 			siegDarstellen(0,2,1,1,2,0)
 			return true
 		}
-		if(f00==aktuellerSpieler && f10==aktuellerSpieler && f20==aktuellerSpieler)
+		if(feld[0][0]==aktuellerSpieler && feld[1][0]==aktuellerSpieler && feld[2][0]==aktuellerSpieler)
 		{
 			
 			siegDarstellen(0,0,1,0,2,0)
 			return true
 		}
-		if(f01==aktuellerSpieler && f11==aktuellerSpieler && f21==aktuellerSpieler)
+		if(feld[0][1]==aktuellerSpieler && feld[1][1]==aktuellerSpieler && feld[2][1]==aktuellerSpieler)
 		{
 			
 			siegDarstellen(0,1,1,1,2,1)
 			return true
 		}
-		if(f02==aktuellerSpieler && f12==aktuellerSpieler && f22==aktuellerSpieler)
+		if(feld[0][2]==aktuellerSpieler && feld[1][2]==aktuellerSpieler && feld[2][2]==aktuellerSpieler)
 		{
 			
 			siegDarstellen(0,2,1,2,2,2)
 			return true
 		}
-		return false
+		return false  
 	}
 	function feldBelegen(x,y)
 	{
 	
 			if(x==0 && y==0)
 			{
-				f00=aktuellerSpieler
+				feld[0][0]=aktuellerSpieler
 			}
 			else if(x==0 && y==1)
 			{	
-				f01=aktuellerSpieler
+				feld[0][1]=aktuellerSpieler
 			}
 			else if(x==0 && y==2)
 			{
-				f02=aktuellerSpieler
+				feld[0][2]=aktuellerSpieler
 			}
 		
 			else if(x==1 && y==0)
 			{
-				f10=aktuellerSpieler
+				feld[1][0]=aktuellerSpieler
 			}
 			else if(x==1 && y==1)
 			{	
-				f11=aktuellerSpieler
+				feld[1][1]=aktuellerSpieler
 			}
 			else if(x==1 && y==2)
 			{
-				f12=aktuellerSpieler
+				feld[1][2]=aktuellerSpieler
 			}
 		
 			else if(x==2 && y==0)
 			{
-				f20=aktuellerSpieler
+				feld[2][0]=aktuellerSpieler
 			}
 			else if(x==2 && y==1)
 			{	
-				f21=aktuellerSpieler
+				feld[2][1]=aktuellerSpieler
 			}
 			else if(x==2 && y==2)
 			{
-				f22=aktuellerSpieler
+				feld[2][2]=aktuellerSpieler
 			}	
 		
 	}
 	
 	function siegDarstellen(x1,y1,x2,y2,x3,y3)
-	{
+
+	{	
 		faerbeButton(x1,y1)
 		faerbeButton(x2,y2)
 		faerbeButton(x3,y3)
@@ -394,16 +355,19 @@
 		</tr>
 	</table>
 	<p>
+		<button onClick="window.location.reload();"> 
+			<div 
+				style="position:absolut; left:40%; bottom:50px; width:300px;">Neues Spiel
+			</div>
+		</button>
+	</p>
+	<p>
 		<a href="index.html">
 			Zurueck zur Hauptseite
 		</a>
 	</p>
 	<p>
 		copyright James Ochs
-	</p>				
-	<button onClick="window.location.reload();"> 
-	<div style="position:absolut; left:40%; bottom:50px; width:300px;">Neues Spiel
-	</div>
-	</button>
+	</p>
 	</body>
 </html>
