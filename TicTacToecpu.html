@@ -128,53 +128,6 @@
 			{
 				x=-1
 			}
-			
-			
-			/*if(zufallsfeld==0 && feld[0][0]==' ')
-			{
-				x=0 
-				y=0
-			}
-			if(zufallsfeld==1 && feld[0][1]==' ')
-			{
-				x=0 
-				y=1
-			}
-			if(zufallsfeld==2 && feld[0][2]==' ')
-			{
-				x=0
-				y=2
-			}
-			if(zufallsfeld==3 && feld[1][0]==' ')
-			{
-				x=1
-				y=0
-			}
-			if(zufallsfeld==4 && feld[1][1]==' ')
-			{
-				x=1
-				y=1
-			}
-			if(zufallsfeld==5 && feld[1][2]==' ')
-			{
-				x=1
-				y=2
-			}
-			if(zufallsfeld==6 && feld[2][0]==' ')
-			{
-				x=2
-				y=0
-			}
-			if(zufallsfeld==7 && feld[2][1]==' ')
-			{
-				x=2
-				y=1
-			}
-			if(zufallsfeld==8 && feld[2][2]==' ')
-			{
-				x=2
-				y=2
-			}*/
 		}	
 		
 		if(x>=0)
@@ -253,46 +206,7 @@
 	}
 	function feldBelegen(x,y)
 	{
-	
-			if(x==0 && y==0)
-			{
-				feld[0][0]=aktuellerSpieler
-			}
-			else if(x==0 && y==1)
-			{	
-				feld[0][1]=aktuellerSpieler
-			}
-			else if(x==0 && y==2)
-			{
-				feld[0][2]=aktuellerSpieler
-			}
-		
-			else if(x==1 && y==0)
-			{
-				feld[1][0]=aktuellerSpieler
-			}
-			else if(x==1 && y==1)
-			{	
-				feld[1][1]=aktuellerSpieler
-			}
-			else if(x==1 && y==2)
-			{
-				feld[1][2]=aktuellerSpieler
-			}
-		
-			else if(x==2 && y==0)
-			{
-				feld[2][0]=aktuellerSpieler
-			}
-			else if(x==2 && y==1)
-			{	
-				feld[2][1]=aktuellerSpieler
-			}
-			else if(x==2 && y==2)
-			{
-				feld[2][2]=aktuellerSpieler
-			}	
-		
+		feld[x][y]=aktuellerSpieler
 	}
 	
 	function siegDarstellen(x1,y1,x2,y2,x3,y3)
