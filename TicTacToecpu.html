@@ -32,6 +32,7 @@
 			let zellenId=x+'.'+y
 			document.getElementById(zellenId).value=aktuellerSpieler
 			feldBelegen(x,y)
+			anzahlKreuze=anzahlKreuze+1
 			spielBeendet=hatAktuellerSpielerGewonnen()
 			if(anzahlKreuze==5)
 			{
