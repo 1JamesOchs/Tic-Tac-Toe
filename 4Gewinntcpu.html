@@ -1,0 +1,319 @@
+<html>
+	<body>
+		<p>
+			<strong>
+				<font size="7">
+					4 Gewinnt
+				</font>
+			</strong>
+		</p>
+		<p>
+			<b>
+				<font size="5">
+					Mensch gegen Computer
+				</font>
+			</b>
+		</p>
+		<script type="text/javascript">
+		let rot='#ff0000'
+		let blau='#0000ff'
+		let aktuellerSpieler=rot
+		let spielBeendet=false
+		let feld=[
+			[' ',' ',' ',' ',' ',' '], //dies ist Zeile 0
+			[' ',' ',' ',' ',' ',' '],
+			[' ',' ',' ',' ',' ',' '],
+			[' ',' ',' ',' ',' ',' '],
+			[' ',' ',' ',' ',' ',' '],
+			[' ',' ',' ',' ',' ',' ']  //dies ist Zeile 5, diese Zeile ist im array gegeben durch feld[5] die dritte spalte in Zeile 5 wird erreicht durch feld[5][3]
+			]
+		
+	function zelleBelegen(x,y)
+	{	
+		if(spielBeendet==true)
+		{
+			return
+		}
+		feld[y][x]=aktuellerSpieler
+		let id=+ y+'.'+x
+		console.log(id)
+		document.getElementById(id).style.backgroundColor=aktuellerSpieler
+		
+		
+		for(let zeile=0; zeile<3; zeile=zeile+1)
+		{	
+			for(let spalte=0; spalte<6; spalte=spalte+1)
+			{
+				
+				if(siegUeberpruefen(spalte,zeile,spalte,zeile+1,spalte,zeile+2,spalte,zeile+3))
+				{
+					console.log(aktuellerSpieler+' hat gewonnen')
+					spielBeendet=true
+					siegDarstellen(spalte,zeile,spalte,zeile+1,spalte,zeile+2,spalte,zeile+3)
+				}	
+			
+			}
+		}
+		for(let spalte=0; spalte<3; spalte=spalte+1)
+		{	
+			for(let zeile=0; zeile<6; zeile=zeile+1)
+			{
+				
+				if(siegUeberpruefen(spalte,zeile,spalte+1,zeile,spalte+2,zeile,spalte+3,zeile))
+				{
+					console.log(aktuellerSpieler+' hat gewonnen')
+					spielBeendet=true
+					siegDarstellen(spalte,zeile,spalte+1,zeile,spalte+2,zeile,spalte+3,zeile)
+				}	
+			
+			}
+		}
+		for(let spalte=0; spalte<3; spalte=spalte+1)
+		{	
+			for(let zeile=0; zeile<3; zeile=zeile+1)
+			{
+				
+				if(siegUeberpruefen(spalte,zeile,spalte+1,zeile+1,spalte+2,zeile+2,spalte+3,zeile+3))
+				{
+					console.log(aktuellerSpieler+' hat gewonnen')
+					spielBeendet=true
+					siegDarstellen(spalte,zeile,spalte+1,zeile+1,spalte+2,zeile+2,spalte+3,zeile+3)
+				}	
+			
+			}	
+		}
+		
+		for(let spalte=3; spalte<6; spalte=spalte+1)
+		{	
+			for(let zeile=0; zeile<3; zeile=zeile+1)
+			{
+				
+				if(siegUeberpruefen(spalte,zeile,spalte-1,zeile+1,spalte-2,zeile+2,spalte-3,zeile+3))
+				{
+					console.log(aktuellerSpieler+' hat gewonnen')
+					spielBeendet=true
+					siegDarstellen(spalte,zeile,spalte-1,zeile+1,spalte-2,zeile+2,spalte-3,zeile+3)
+				}	
+			}
+		}
+		 if(gibFeldInhalt(0,0)!=' ' && gibFeldInhalt(1,0)!=' ' && gibFeldInhalt(2,0)!=' '  && gibFeldInhalt(3,0)!=' ' && gibFeldInhalt(4,0)!=' '&& gibFeldInhalt(5,0)!=' ')
+		 {
+			spielBeendet=true
+		 }
+		
+		if(aktuellerSpieler==rot)
+		{	
+			aktuellerSpieler=blau
+		}	
+		else
+		{
+			aktuellerSpieler=rot
+		}
+		
+	}
+	
+	function cpuZug()
+	{
+		let zufallsSpalte=Math.floor(Math.random()*6)
+		if(gibFeldInhalt(zufallsSpalte,0)==' ')
+		{
+			 spalteAuswaehlen(zufallsSpalte)
+		}
+		else
+		{
+			cpuZug()
+		}
+		
+	}
+		
+		
+		
+		function spalteAuswaehlen(spalte)
+		{
+			console.log(spalte)
+			if(feld[0][spalte]!=' ')
+			{
+				return 
+			}
+			if(feld[1][spalte]!=' ')
+			{	
+				zelleBelegen(spalte,0)
+				return
+			}
+			if(feld[2][spalte]!=' ')
+			{	
+				zelleBelegen(spalte,1)
+				return
+			}
+			if(feld[3][spalte]!=' ')
+			{	
+				zelleBelegen(spalte,2)
+				return
+			}
+			if(feld[4][spalte]!=' ')
+			{	
+				zelleBelegen(spalte,3)					
+				return
+			}
+			if(feld[5][spalte]!=' ')
+			//if(gibFeldInhalt(spalte,5)!=' ')
+			{	
+				zelleBelegen(spalte,4)
+				return
+			}	
+			zelleBelegen(spalte,5)
+		}
+			function siegUeberpruefen(x1,y1,x2,y2,x3,y3,x4,y4)
+			{	
+				let feldInhalt1=gibFeldInhalt(x1,y1)
+				let feldInhalt2=gibFeldInhalt(x2,y2)
+				let feldInhalt3=gibFeldInhalt(x3,y3)
+				let feldInhalt4=gibFeldInhalt(x4,y4)
+				
+				if(feldInhalt1!=' ')
+				{	
+					if(feldInhalt1==feldInhalt2 && feldInhalt1==feldInhalt3 && feldInhalt1==feldInhalt4)
+					{
+						return true
+					}
+					
+				}
+				return false
+			}
+			
+			function gibFeldInhalt(x,y)
+			{
+				return feld[y][x]
+			}
+		
+		function siegDarstellen(x1,y1,x2,y2,x3,y3,x4,y4)
+		{
+			faerbeButton(x1,y1)
+			faerbeButton(x2,y2)
+			faerbeButton(x3,y3)
+			faerbeButton(x4,y4)
+		}
+		
+		function faerbeButton(x,y)
+		{
+			let Id=y+'.'+x
+			document.getElementById(Id).style.backgroundColor="#00ff00"
+		}
+			
+		function spalteAuswaehlenMensch(spalte)
+		{		
+			if(gibFeldInhalt(spalte,0)!=' ')
+			{
+				return
+			}
+			else
+			{
+				spalteAuswaehlen(spalte)
+			}
+			
+			if(spielBeendet==false)
+			{
+				cpuZug()
+			}
+		}
+		</script>
+		<table>
+			<tr>
+				<td>
+				<input type="button" onClick="spalteAuswaehlenMensch(0)" style="min-width:100px;min-height:100px;font-size:30pt;">
+				</input>
+				</td>
+				<td>
+				<input type="button" onClick="spalteAuswaehlenMensch(1)" style="min-width:100px;min-height:100px;font-size:30pt;">
+				</input>
+				</td>
+				<td>
+				<input type="button" onClick="spalteAuswaehlenMensch(2)" style="min-width:100px;min-height:100px;font-size:30pt;">
+				</input>
+				</td>
+				<td>
+				<input type="button" onClick="spalteAuswaehlenMensch(3)" style="min-width:100px;min-height:100px;font-size:30pt;">
+				</input>
+				</td>
+				<td>
+				<input type="button" onClick="spalteAuswaehlenMensch(4)" style="min-width:100px;min-height:100px;font-size:30pt;">
+				</input>
+				</td>
+				<td>
+				<input type="button" onClick="spalteAuswaehlenMensch(5)" style="min-width:100px;min-height:100px;font-size:30pt;">
+				</input>
+				</td>
+			</tr>
+		</table>
+		<style type="text/css">
+		.tg  {border-collapse:collapse;border-spacing:0;}
+		.tg td{font-family:Arial, sans-serif;font-size:45;padding:49.6 49.6;border-style:solid;border-width:4px;overflow:hidden;word-break:normal;}
+		.tg th{font-family:Arial, sans-serif;font-size:45;font-weight:normal;padding:49.6 49.6;border-style:solid;border-width:4px;overflow:hidden;word-break:normal;}
+</style>
+<table class="tg">
+  <tr>
+    <td class="tg-031.e" id="0.0"></td>
+    <td class="tg-031.e" id="0.1"></td>
+    <td class="tg-031.e" id="0.2"></td>
+    <td class="tg-031.e" id="0.3"></td>
+    <td class="tg-031.e" id="0.4"></td>
+	<td class="tg-031.e" id="0.5"></td>
+  </tr>
+  <tr>
+    <td class="tg 031.e" id="1.0"></td>
+    <td class="tg-031.e" id="1.1"></td>
+    <td class="tg-031.e" id="1.2"></td>
+    <td class="tg-031.e" id="1.3"></td>
+    <td class="tg-031.e" id="1.4"></td>
+	<td class="tg-031.e" id="1.5"></td>
+  </tr>
+  <tr>
+    <td class="tg-031.e" id="2.0"></td>
+    <td class="tg-031.e" id="2.1"></td>
+    <td class="tg-031.e" id="2.2"></td>
+    <td class="tg-031.e" id="2.3"></td>
+    <td class="tg-031.e" id="2.4"></td>
+	<td class="tg-031.e" id="2.5"></td>
+  </tr>
+  <tr>
+    <td class="tg-031.e" id="3.0"></td>
+    <td class="tg-031.e" id="3.1"></td>
+    <td class="tg-031.e" id="3.2"></td>
+    <td class="tg-031.e" id="3.3"></td>
+    <td class="tg-031.e" id="3.4"></td>
+	<td class="tg-031.e" id="3.5"></td>
+  </tr>
+  <tr>
+    <td class="tg-031.e" id="4.0"></td>
+    <td class="tg-031.e" id="4.1"></td>
+    <td class="tg-031.e" id="4.2"></td>
+    <td class="tg-031.e" id="4.3"></td>
+	<td class="tg-031.e" id="4.4"></td>
+	<td class="tg-031.e" id="4.5"></td>
+  </tr>
+  <tr>
+    <td class="tg-031.e" id="5.0"></td>
+    <td class="tg-031.e" id="5.1"></td>
+    <td class="tg-031.e" id="5.2"></td>
+    <td class="tg-031.e" id="5.3"></td>
+    <td class="tg-031.e" id="5.4"></td>
+	<td class="tg-031.e" id="5.5"></td>
+  </tr>
+</table>
+		<p>
+		<button onClick="window.location.reload();"> 
+			<div 
+				style="position:absolut; left:40%; bottom:50px; width:300px;">Neues Spiel
+			</div>
+		</button>
+	</p>
+	<p>
+		<a href="index.html">
+			Zurueck zur Hauptseite
+		</a>
+	</p>
+	<p>
+		copyright James Ochs
+	</p>
+	</body
+</html>
